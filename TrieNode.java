@@ -1,21 +1,21 @@
 public class TrieNode {
 
-	private Object place;
-    private TrieNode[] children = new TrieNode[TrieTree.size];
-    private boolean isWord;
-    private String name;
+	public Object place;
+    public TrieNode[] children = new TrieNode[TrieTree.size];
+    public boolean isEndOfWord;
+    public String name;
 
     public TrieNode(){
-        isWord = false ;
+        isEndOfWord = false ;
         for(int i = 0 ; i < TrieTree.size ; i ++){
             children[i] = null ;
         }
     }
 
-    public TrieNode(Object place){
-        isWord = false ;
+    public TrieNode(Object place, String name){
+        isEndOfWord = false ;
         this.place = place;
-        this.name = place.getName();
+        this.name = name;
         for(int i = 0 ; i < TrieTree.size ; i ++){
             children[i] = null ;
         }
