@@ -64,5 +64,22 @@ public class KDTree{
     		}
     	}
     }
+    public void getAllNodes(){
+    	printPreorder(this.root);
+    }
+    private void printPreorder(Node node)
+    {
+        if (node == null)
+            return;
+        if (! node.getCoordinatio().equals(this.root.getCoordinatio())) {
+        	System.out.print(node.getNodeDetailes());
+        }
+        
+        /* then recur on left subtree */
+        printPreorder(node.left);
+ 
+        /* now recur on right subtree */
+        printPreorder(node.right);
+    }
 
 }

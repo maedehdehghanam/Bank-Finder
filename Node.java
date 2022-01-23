@@ -8,6 +8,9 @@ public class Node{
         this.coordination = coordination ;
 
     }
-    public String getCoordination(){
-        return place.name() +": " + coordination.toString();
+    public String getNodeDetailes(){
+        return place.name() +": " + coordination.toString();}
+    public Coordination getCoordinatio(){
+        return coordination;
+    }
 }
