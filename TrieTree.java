@@ -1,8 +1,8 @@
 public class TrieTree{
 
 	public static final int size = 26 ; //number of alphabets
-	public  TrieNode rootNeighborhood = new TrieNode();
-	public  TrieNode rootBank = new TrieNode();
+	public static TrieNode rootNeighborhood = new TrieNode();
+	public static TrieNode rootBank = new TrieNode();
 	public static TrieTree neighborhoodNames= new TrieTree();
 	public static TrieTree bankNames= new TrieTree();
 
@@ -15,7 +15,7 @@ public class TrieTree{
     public static TrieTree banks_names() {
         return bankNames;
     }
-    public void insertNeighborhood(Object neighborhood, String neighborhoodsName){
+    public static void insertNeighborhood(Object neighborhood, String neighborhoodsName){
 
     	TrieNode current = rootNeighborhood;
     	int index = 0;
@@ -32,7 +32,7 @@ public class TrieTree{
         current.place= neighborhood;
 
     }
-    public void insertBank(Object bank, String banksName){
+    public static void insertBank(Object bank, String banksName){
 
     	TrieNode current = rootBank;
     	int index = 0;
@@ -50,5 +50,40 @@ public class TrieTree{
 
     }
 
-    
+    public static Neighborhood searchForNeighborhood(String key){
+        int index ;
+        TrieNode current = rootNeighborhood;
+        for (int level = 0; level < key.length(); level++)
+        {
+            index = key.charAt(level) - 'a';
+            if (current.children[index] == null)
+                return null;
+
+            current= current.children[index];
+        }
+
+        if(current != null && current.isEndOfWord){
+            return (Neighborhood ) current.getPlace();
+        }
+        return null;
+    }
+
+    public static Bank searchForBank(String key){
+        int index ;
+        TrieNode current = rootBank;
+        for (int level = 0; level < key.length(); level++)
+        {
+            index = key.charAt(level) - 'a';
+            if (current.children[index] == null)
+                return null;
+
+            current= (Bank) current.children[index];
+        }
+
+        if(current != null && current.isEndOfWord){
+            return current.getPlace();
+        }
+        return null;
+    }
+
 }
