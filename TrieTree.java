@@ -77,11 +77,11 @@ public class TrieTree{
             if (current.children[index] == null)
                 return null;
 
-            current= (Bank) current.children[index];
+            current=  current.children[index];
         }
 
         if(current != null && current.isEndOfWord){
-            return current.getPlace();
+            return (Bank) current.getPlace();
         }
         return null;
     }

@@ -10,6 +10,7 @@ public class Neighborhood{
         this.RU = RU;
         this.RD = RD;
         this.name = name;
+        TrieTree.insertNeighborhood(this,this.name);
     }
 
     public Coordination getLD() {

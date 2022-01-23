@@ -10,17 +10,17 @@ public class KDTree{
     {
 
         if (root == null){
-            root = new Node(coordination);
+            root = new Node(place.coordination, place);
             return root ;
         }
         // we are at dimention X
         if(depth % k == 0){
 
-            if(place.oordination.x < root.coordination.x){
-                root.left = insertNodeRecursive(root.left,place.coordination ,depth+1);
+            if(place.coordination.x < root.coordination.x){
+                root.left = insertNodeRecursive(root.left,place ,depth+1);
             }
             else{
-                root.right = insertNodeRecursive(root.right ,place.coordination , depth + 1);
+                root.right = insertNodeRecursive(root.right ,place , depth + 1);
             }
         }
 
@@ -28,10 +28,10 @@ public class KDTree{
         else{
 
             if(place.coordination.y < root.coordination.y){
-                root.left = insertNodeRecursive(root.left ,  place.coordination , depth+1);
+                root.left = insertNodeRecursive(root.left ,  place, depth+1);
             }
             else{
-                root.right = insertNodeRecursive(root.right  ,place.coordination , depth + 1);
+                root.right = insertNodeRecursive(root.right  ,place , depth + 1);
             }
         }
 
@@ -48,19 +48,19 @@ public class KDTree{
     	// we are at dimention X 
     	if(depth%2 == 0){
     		if(place.coordination.x < root.coordination.x){
-    			return searchTreeRecursive(root.left, place.coordination, depth+1);
+    			return searchTreeRecursive(root.left, place, depth+1);
     		}
     		else{
-    			return searchTreeRecursive(root.right, place.coordination, depth+1);
+    			return searchTreeRecursive(root.right, place, depth+1);
     		}
     	}
     	// we are at dimention X
     	else{
     		if(place.coordination.y < root.coordination.y){
-    			return searchTreeRecursive(root.left, place.coordination, depth+1);
+    			return searchTreeRecursive(root.left, place, depth+1);
     		}
     		else{
-    			return searchTreeRecursive(root.right, place.coordination, depth+1);
+    			return searchTreeRecursive(root.right, place, depth+1);
     		}
     	}
     }
