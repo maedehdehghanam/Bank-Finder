@@ -46,7 +46,7 @@ public class Bank {
     		return true;
     	}
     }
-    public void getAllBranches(Node node){
+    public void getAllBranches(){
     	branches.getAllNodes();
     }
 }

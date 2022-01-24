@@ -43,6 +43,37 @@ public class BankFinder{
     			TrieTree.searchForBank(branchBank.bankName).addBranch(branchBank);
     			System.out.println("Branch is successfully added");
     		}
+    		else if(order.equals("delBr")){
+    			Coordination c = new Coordination(scanner.nextInt(), scanner.nextInt());
+    			Bank search = new Bank(c,"search");
+    			if(Bank.allBanksKDTree.searchTreeRecursive(Bank.allBanksKDTree.getRoot(), search,0 ) == null){
+    				System.out.println("There is not a bank here!");
+    			}
+    			else{
+    				System.out.println("This coordination is Taken! Please choose another coordination!");
+    				search =Bank.allBanksKDTree.searchTreeRecursive(Bank.allBanksKDTree.getRoot(), search,0 );
+    				if (search.isBranch) {
+    					boolean deleted = TrieTree.searchForBank(search.bankName).deleteBranch(search);
+    					if(deleted){
+    						System.out.println("Branch is deleted!");
+    					}
+    				}
+    				else{
+    					System.out.println("This is the main branch of "+ search.bankName+
+    						" bank. You can't delete a main branch!");
+    				}
+    			}
+    			
+    		}
+    		else if(order.equals("listBrs")){
+    			String name =scanner.nextLine();
+    			if(TrieTree.searchForBank(name)== null){
+    				System.out.println("There is noy such a bank");
+    			}
+    			else{
+    				TrieTree.searchForBank(name).getAllBranches();
+    			}
+    		}
     	}
 	}
 }
