@@ -38,6 +38,10 @@ public class Bank {
     	if(branches.searchTreeRecursive(branches.getRoot(), branch, 0) == null)
     		return false;
     	else{
+            Node deleted = branches.deleteNode(branches.getRoot(),branches.searchTreeRecursive(branches.getRoot(),
+             branch, 0),0 );
+            deleted = allBanksKDTree.deleteNode(allBanksKDTree.getRoot(),
+                allBanksKDTree.searchTreeRecursive(allBanksKDTree.getRoot(),branch, 0),0 );
     		this.noBranches--;
     		return true;
     	}
