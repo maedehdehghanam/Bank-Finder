@@ -16,6 +16,7 @@ public class Bank {
         TrieTree.insertBank(this, this.bankName);
         branches.insertNodeRecursive(new Node(coordination,this), this, 0);
         isBranch = false;
+        allBanksKDTree.insertNodeRecursive(allBanksKDTree.getRoot(),this,0);
     }
     public Bank(Coordination coordination ,String bankName  ,String branchname){
         this.coordination = coordination ;
@@ -24,6 +25,7 @@ public class Bank {
         this.name = branchname;
         branches = null;
         isBranch = true;
+        allBanksKDTree.insertNodeRecursive(allBanksKDTree.getRoot(),this,0);
     }
     public void addBranch(Bank branch){
     	branches.insertNodeRecursive(branches.getRoot(), branch, 0);
