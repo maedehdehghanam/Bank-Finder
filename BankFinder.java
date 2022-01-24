@@ -51,7 +51,7 @@ public class BankFinder{
     			}
     			else{
     				System.out.println("This coordination is Taken! Please choose another coordination!");
-    				search =Bank.allBanksKDTree.searchTreeRecursive(Bank.allBanksKDTree.getRoot(), search,0 );
+    				search =Bank.allBanksKDTree.searchTreeRecursive(Bank.allBanksKDTree.getRoot(), search,0 ).place;
     				if (search.isBranch) {
     					boolean deleted = TrieTree.searchForBank(search.bankName).deleteBranch(search);
     					if(deleted){
@@ -73,6 +73,12 @@ public class BankFinder{
     			else{
     				TrieTree.searchForBank(name).getAllBranches();
     			}
+    		}
+    		else if(order.equals("nearB")){
+    			Coordination c = new Coordination(scanner.nextInt(), scanner.nextInt());
+    			Node ans  = Bank.allBanksKDTree.nearestNeighborRec(new Node(c),Bank.allBanksKDTree.getRoot() ,
+    				new Node(new Coordination(Integer.MAX_VALUE , Integer.MAX_VALUE)),0);
+    			System.out.println("The nearest bank is at "+ans.coordination.toString());
     		}
     	}
 	}
