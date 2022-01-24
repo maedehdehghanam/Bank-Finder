@@ -1,15 +1,33 @@
+import java.util.* ;
 public class BankFinder{
 	public static void main(String[] args) {
-		Neighborhood man = new Neighborhood(new Coordination(2,2), new Coordination(2,4),
-		 new Coordination(4,2), new Coordination(4,4), "heycutie");
-		Neighborhood man2 = new Neighborhood(new Coordination(2,2), new Coordination(2,4),
-		 new Coordination(4,2), new Coordination(4,4), "heycutier");
-		TrieTree banks = TrieTree.getNeighborhoodNames();
-		 banks.insertNeighborhood(man, "heycutie");
-		 banks.insertNeighborhood(man2, "heycutier");
-		 System.out.println(man.getName());
-		Neighborhood h = banks.searchForNeighborhood(man2.getName());
-		System.out.println(h.getName());
+		Scanner scanner = new Scanner(System.in);  // Create a Scanner object
+    	System.out.println("Hi! welcome to Bank Finder!");
+    	String order = scanner.nextLine();
+    	while(!order.equals("end")){
+    		if (order.equals("addN")){
+    			String name = scanner.nextLine();
+    			Coordination LU = new Coordination(scanner.nextInt(), scanner.nextInt()) ;
+    			Coordination LD = new Coordination(scanner.nextInt(), scanner.nextInt()) ;
+    			Coordination RU = new Coordination(scanner.nextInt(), scanner.nextInt()) ;
+    			Coordination RD = new Coordination(scanner.nextInt(), scanner.nextInt()) ;
+    			Neighborhood neighborhood = new Neighborhood(LU,LD,RU,RD, name);
+    		}
+    		else if(order.equals("addB")){
 
+    			System.out.println("please enter your cordination and a name to build a bank!");
+
+    			Bank mainBank = new Bank(new Coordination(scanner.nextInt(), scanner.nextInt()),scanner.nextLine());
+
+    			while(Bank.allBanksKDTree.searchTreeRecursive(Bank.allBanksKDTree.getRoot(), mainBank,0 ) != null){
+    				System.out.println("This coordination is Taken! Please choose another coordination!");
+    				mainBank = new Bank(new Coordination(scanner.nextInt(), scanner.nextInt()),scanner.nextLine());
+    			}
+    			Bank.addToKDTree(mainBank);
+    			mainBank.addBankToTriTree(mainBank);
+    			System.out.println("Bank is successfully added");
+
+    		}
+    	}
 	}
 }
