@@ -80,6 +80,20 @@ public class BankFinder{
     				new Node(new Coordination(Integer.MAX_VALUE , Integer.MAX_VALUE)),0);
     			System.out.println("The nearest bank is at "+ans.coordination.toString());
     		}
+    		else if(order.equals("nearBr")){
+    			String name =scanner.nextLine();
+    			if(TrieTree.searchForBank(name)== null){
+    				System.out.println("There is noy such a bank");
+    			}
+    			else{
+    				Coordination c = new Coordination(scanner.nextInt(), scanner.nextInt());
+    				KDTree theBranchs = TrieTree.searchForBank(name).branches;
+    				Node ans  = theBranchs.nearestNeighborRec(new Node(c),theBranchs.getRoot(),
+    					new Node(new Coordination(Integer.MAX_VALUE , Integer.MAX_VALUE)),0);
+    				System.out.println("The nearest branch of "+ name+" is at "+ans.coordination.toString());
+    				
+    			}
+    		}
     	}
 	}
 }
