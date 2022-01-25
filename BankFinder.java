@@ -3,8 +3,8 @@ public class BankFinder{
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);  // Create a Scanner object
     	System.out.println("Hi! welcome to Bank Finder!");
-    	String order = scanner.nextLine();
-    	while(!order.equals("end")){
+    	while(true){
+    		String order = scanner.nextLine();
     		if (order.equals("addN")){
     			String name = scanner.nextLine();
     			Coordination LU = new Coordination(scanner.nextInt(), scanner.nextInt()) ;
@@ -16,23 +16,28 @@ public class BankFinder{
     		else if(order.equals("addB")){
 
     			System.out.println("please enter your desired cordination and a name to build a bank!");
-
-    			Bank mainBank = new Bank(new Coordination(scanner.nextInt(), scanner.nextInt()),scanner.nextLine());
+    			String name = scanner.nextLine();
+    			int x = scanner.nextInt();
+    			int y =scanner.nextInt();
+    			Bank mainBank = new Bank(new Coordination(x, y),name);
 
     			while(Bank.allBanksKDTree.searchTreeRecursive(Bank.allBanksKDTree.getRoot(), mainBank,0 ) != null){
     				System.out.println("This coordination is Taken! Please choose another coordination!");
     				mainBank = new Bank(new Coordination(scanner.nextInt(), scanner.nextInt()),scanner.nextLine());
     			}
     			Bank.addToKDTree(mainBank);
+    			Bank.allBanksKDTree.getAllNodes();
     			mainBank.addBankToTriTree(mainBank);
     			System.out.println("Bank is successfully added");
 
     		}
     		else if (order.equals("addBr")){
-    			System.out.println("please enter your desired cordination, Bank name and branch name to build a branch!");
 
+    			System.out.println("please enter your desired cordination, Bank name and branch name to build a branch!");
+    			String bankn =scanner.nextLine();
+    			String branchn=  scanner.nextLine();
     			Bank branchBank = new Bank(new Coordination(scanner.nextInt(), scanner.nextInt()),
-    				scanner.nextLine(),scanner.nextLine());
+    				bankn,branchn);
 
     			while(Bank.allBanksKDTree.searchTreeRecursive(Bank.allBanksKDTree.getRoot(), branchBank,0 ) != null){
     				System.out.println("This coordination is Taken! Please choose another coordination!");
@@ -50,7 +55,6 @@ public class BankFinder{
     				System.out.println("There is not a bank here!");
     			}
     			else{
-    				System.out.println("This coordination is Taken! Please choose another coordination!");
     				search =Bank.allBanksKDTree.searchTreeRecursive(Bank.allBanksKDTree.getRoot(), search,0 ).place;
     				if (search.isBranch) {
     					boolean deleted = TrieTree.searchForBank(search.bankName).deleteBranch(search);
@@ -71,6 +75,7 @@ public class BankFinder{
     				System.out.println("There is noy such a bank");
     			}
     			else{
+    				System.out.println(TrieTree.searchForBank(name).noBranches);
     				TrieTree.searchForBank(name).getAllBranches();
     			}
     		}
@@ -78,12 +83,12 @@ public class BankFinder{
     			Coordination c = new Coordination(scanner.nextInt(), scanner.nextInt());
     			Node ans  = Bank.allBanksKDTree.nearestNeighborRec(new Node(c),Bank.allBanksKDTree.getRoot() ,
     				new Node(new Coordination(Integer.MAX_VALUE , Integer.MAX_VALUE)),0);
-    			System.out.println("The nearest bank is at "+ans.coordination.toString());
+    			System.out.println("The nearest bank is "+ ans.place.name +" at "+ans.coordination.toString());
     		}
     		else if(order.equals("nearBr")){
     			String name =scanner.nextLine();
     			if(TrieTree.searchForBank(name)== null){
-    				System.out.println("There is noy such a bank");
+    				System.out.println("There is not such a bank");
     			}
     			else{
     				Coordination c = new Coordination(scanner.nextInt(), scanner.nextInt());

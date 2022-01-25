@@ -6,17 +6,21 @@ public class KDTree{
         return root;
     }
     // Here we start from node and 
+    public void insert(Bank place){
+        root = insertNodeRecursive(root,place,0);
+    }
     public Node insertNodeRecursive(Node root, Bank place, int depth)
     {
 
         if (root == null){
             root = new Node(place.coordination, place);
+
             return root ;
         }
         int theDimention = depth % k;
         // we are at dimention X
         if(theDimention == 0){
-
+            System.out.println("done222");
             if(place.coordination.x < root.coordination.x){
                 root.left = insertNodeRecursive(root.left,place ,depth+1);
             }
@@ -68,15 +72,18 @@ public class KDTree{
     }
     //getting all nodes using preorder method
     public void getAllNodes(){
-    	printPreorder(this.root);
+    	this.printPreorder(this.root);
     }
-    private void printPreorder(Node node)
+    public void printPreorder(Node node)
     {
-        if (node == null)
+        if (node == null){
+            System.out.println("fuck!");
             return;
-        if (! node.getCoordinatio().equals(this.root.getCoordinatio())) {
-        	System.out.print(node.getNodeDetailes());
         }
+        //if (! node.getCoordinatio().equals(this.root.getCoordinatio())) {
+        
+            System.out.println(node.getNodeDetailes());
+        //}
         
         /* then recur on left subtree */
         printPreorder(node.left);

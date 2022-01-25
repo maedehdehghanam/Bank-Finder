@@ -13,7 +13,6 @@ public class Bank {
         this.branchName = null;
         this.name = name;
         branches = new KDTree();
-        branches.insertNodeRecursive(new Node(coordination,this), this, 0);
         isBranch = false;
     }
     public Bank(Coordination coordination ,String bankName  ,String branchname){
@@ -25,13 +24,13 @@ public class Bank {
         isBranch = true;
     }
     public static void addToKDTree(Bank bank){
-        allBanksKDTree.insertNodeRecursive(allBanksKDTree.getRoot(),bank,0);
+        allBanksKDTree.insert(bank);
     }
     public void addBankToTriTree(Bank bank){
          TrieTree.insertBank(this, this.bankName);
     }
     public void addBranch(Bank branch){
-    	branches.insertNodeRecursive(branches.getRoot(), branch, 0);
+    	branches.insert(branch);
     	this.noBranches++;
     }
     public boolean deleteBranch(Bank branch){
