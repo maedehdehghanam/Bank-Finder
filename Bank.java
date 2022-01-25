@@ -32,7 +32,7 @@ public class Bank {
     }
     public void addBranch(Bank branch){
     	branches.insert(branch);
-        branchesNamesTree.insertBank(branch, branch.name);
+        branchesNamesTree. insertBranch(branchesNamesTree.getRoot(),branch, branch.name);
     	this.noBranches++;
     }
     public boolean deleteBranch(Bank branch){

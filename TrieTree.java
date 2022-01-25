@@ -55,7 +55,7 @@ public class TrieTree{
         current.place= bank;
 
     }
-
+    
     public static Neighborhood searchForNeighborhood(String key){
         int index ;
         TrieNode current = rootNeighborhood;
@@ -92,6 +92,22 @@ public class TrieTree{
         return null;
     }
     /////
+    public void insertBranch(TrieNode root, Object bank, String banksName){
+        TrieNode current = root;
+        int index = 0;
+        for (int level = 0; level < banksName.length() ; level++)
+        {
+            index = banksName.charAt(level) - 'a';
+            if (current.children[index] == null)
+                current.children[index] = new TrieNode();
+
+            current= current.children[index];
+        }
+        current.isEndOfWord = true;
+        current.name = banksName;
+        current.place= bank;
+    }
+    
     public Bank searchForBranch(TrieNode root, String key){
         int index ;
         TrieNode current = root;
