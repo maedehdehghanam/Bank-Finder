@@ -215,10 +215,10 @@ public class KDTree{
     public int distanceCalculator(Coordination a, Coordination b){
         return((a.x - b.x)*(a.x - b.x) + (a.y-b.y)*(a.y-b.y));
     }
-    public void findAvailableR(Node root, Coordination c, int r){
+    public void findAvailableR(Node root, Coordination c, double r){
         if(root == null)
             return;
-        if(distanceCalculator(c,root.coordination)<(r*r)){
+        if((double) distanceCalculator(c,root.coordination)<(r*r)){
             System.out.println( root.getNodeDetailes());
             findAvailableR(root.left,c,r);
             findAvailableR(root.right,c,r);

@@ -113,6 +113,11 @@ public class BankFinder{
     				
     			}
     		}
+    		else if(order.equals("availB")){
+    			double r = scanner.nextDouble();
+    			Coordination c= new Coordination(scanner.nextInt(), scanner.nextInt());
+    			Bank.allBanksKDTree.findAvailableR(Bank.allBanksKDTree.getRoot(),c,r);
+    		}
     	}
 	}
 }
