@@ -36,7 +36,7 @@ public class Bank {
     	this.noBranches++;
     }
     public boolean deleteBranch(Bank branch){
-    	if(branches.searchTreeRecursive(branches.getRoot(), branch, 0) == null)
+    	if(branchesNamesTree.searchForBranch(branchesNamesTree.getRoot(),branch.name) == null)
     		return false;
     	else{
             Node deleted = branches.deleteNode(branches.getRoot(),branches.searchTreeRecursive(branches.getRoot(),

@@ -91,6 +91,25 @@ public class TrieTree{
         }
         return null;
     }
+    /////
+    public Bank searchForBranch(TrieNode root, String key){
+        int index ;
+        TrieNode current = root;
+        for (int level = 0; level < key.length(); level++)
+        {
+            index = key.charAt(level) - 'a';
+            if (current.children[index] == null)
+                return null;
+
+            current=  current.children[index];
+        }
+
+        if(current != null && current.isEndOfWord){
+            return (Bank) current.getPlace();
+        }
+        return null;
+    }
+
     //////
     public TrieNode removeBr(TrieNode root, Bank br, int depth)
     {
