@@ -20,7 +20,6 @@ public class KDTree{
         int theDimention = depth % k;
         // we are at dimention X
         if(theDimention == 0){
-            System.out.println("done222");
             if(place.coordination.x < root.coordination.x){
                 root.left = insertNodeRecursive(root.left,place ,depth+1);
             }
@@ -77,7 +76,6 @@ public class KDTree{
     public void printPreorder(Node node)
     {
         if (node == null){
-            System.out.println("fuck!");
             return;
         }
         //if (! node.getCoordinatio().equals(this.root.getCoordinatio())) {

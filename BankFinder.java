@@ -15,8 +15,13 @@ public class BankFinder{
     		}
     		else if(order.equals("addB")){
 
-    			System.out.println("please enter your desired cordination and a name to build a bank!");
+    			System.out.println("please enter a name to build a bank!");
     			String name = scanner.nextLine();
+    			while(TrieTree.searchForBank(name) != null){
+    				System.out.println("a bank with this name already exists!");
+    				name = scanner.nextLine();
+    			}
+    			System.out.println("please enter your desired coordination to build a bank!");
     			int x = scanner.nextInt();
     			int y =scanner.nextInt();
     			Bank mainBank = new Bank(new Coordination(x, y),name);
@@ -29,6 +34,7 @@ public class BankFinder{
     			Bank.allBanksKDTree.getAllNodes();
     			mainBank.addBankToTriTree(mainBank);
     			System.out.println("Bank is successfully added");
+    			scanner.next();
 
     		}
     		else if (order.equals("addBr")){
@@ -61,6 +67,9 @@ public class BankFinder{
     					if(deleted){
     						System.out.println("Branch is deleted!");
     					}
+    					else{
+    						System.out.println("this Branch doesn't exists!");
+    					}
     				}
     				else{
     					System.out.println("This is the main branch of "+ search.bankName+
@@ -91,8 +100,13 @@ public class BankFinder{
     				System.out.println("There is not such a bank");
     			}
     			else{
+    				Bank b = TrieTree.searchForBank(name);
+    				if(b.branches.searchTreeRecursive(b.branches.getRoot(), b, 0) == null){
+    					System.out.println("There is not such a bank");
+    				}
+    				
     				Coordination c = new Coordination(scanner.nextInt(), scanner.nextInt());
-    				KDTree theBranchs = TrieTree.searchForBank(name).branches;
+    				KDTree theBranchs = b.branches;
     				Node ans  = theBranchs.nearestNeighborRec(new Node(c),theBranchs.getRoot(),
     					new Node(new Coordination(Integer.MAX_VALUE , Integer.MAX_VALUE)),0);
     				System.out.println("The nearest branch of "+ name+" is at "+ans.coordination.toString());
