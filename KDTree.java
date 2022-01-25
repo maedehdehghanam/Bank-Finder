@@ -215,6 +215,17 @@ public class KDTree{
     public int distanceCalculator(Coordination a, Coordination b){
         return((a.x - b.x)*(a.x - b.x) + (a.y-b.y)*(a.y-b.y));
     }
+    public void findAvailableR(Node root, Coordination c, int r){
+        if(root == null)
+            return;
+        if(distanceCalculator(c,root.coordination)<(r*r)){
+            System.out.println( root.getNodeDetailes());
+            findAvailableR(root.left,c,r);
+            findAvailableR(root.right,c,r);
+        } else{
+            findAvailableR(root.left,c,r);
+        }
+    }
     public  Node nearestNeighborRec(Node point , Node root ,  Node bestNode , int depth){
 
         if(root == null) 
@@ -253,4 +264,5 @@ public class KDTree{
         return bestNode ;
 
     }
+
 }
