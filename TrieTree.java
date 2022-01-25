@@ -5,8 +5,14 @@ public class TrieTree{
 	public static TrieNode rootBank = new TrieNode();
 	public static TrieTree neighborhoodNames= new TrieTree();
 	public static TrieTree bankNames= new TrieTree();
-
-	private TrieTree() {        
+    public TrieNode myRoot ;
+	public TrieTree() {        
+    }
+    public TrieTree(TrieNode root){
+        this.myRoot = root;
+    }
+    public TrieNode getRoot(){
+        return myRoot;
     }
     
     public static TrieTree getNeighborhoodNames() {
@@ -85,5 +91,44 @@ public class TrieTree{
         }
         return null;
     }
-    
+    //////
+    public TrieNode removeBr(TrieNode root, Bank br, int depth)
+    {
+
+        if (root == null)
+            return null;
+
+        if (depth == br.name.length()) {
+
+
+            if (root.isEndOfWord)
+                root.isEndOfWord = false;
+
+            if (isEmpty(root)) {
+                root = null;
+            }
+
+            return root;
+        }
+
+
+        int index = br.name.charAt(depth) - 'a';
+        root.children[index] = removeBr(root.children[index] , br , depth + 1);
+
+        if(isEmpty(root) &&  (!root.isEndOfWord) ) {
+            root = null ;
+        }
+
+        return  root ;
+
+    }
+    boolean isEmpty(TrieNode root)
+    {
+        for (int i = 0; i < TrieTree.size; i++)
+            if (root.children[i] != null)
+                return false;
+
+        return true;
+    }
+    /////////////
 }

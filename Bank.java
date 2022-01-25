@@ -7,6 +7,7 @@ public class Bank {
 	public String branchName;
     public String name;
 	public KDTree branches;
+    public TrieTree branchesNamesTree = new TrieTree(new TrieNode());
 	public Bank(Coordination coordination ,  String name){
         this.coordination = coordination ;
         this. bankName = name ;
@@ -31,6 +32,7 @@ public class Bank {
     }
     public void addBranch(Bank branch){
     	branches.insert(branch);
+        branchesNamesTree.insertBank(branch, branch.name);
     	this.noBranches++;
     }
     public boolean deleteBranch(Bank branch){
@@ -41,6 +43,7 @@ public class Bank {
              branch, 0),0 );
             deleted = allBanksKDTree.deleteNode(allBanksKDTree.getRoot(),
                 allBanksKDTree.searchTreeRecursive(allBanksKDTree.getRoot(),branch, 0),0 );
+            branchesNamesTree.removeBr(branchesNamesTree.getRoot(),branch,0);
     		this.noBranches--;
     		return true;
     	}
