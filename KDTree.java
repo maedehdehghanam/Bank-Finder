@@ -215,16 +215,32 @@ public class KDTree{
     public int distanceCalculator(Coordination a, Coordination b){
         return((a.x - b.x)*(a.x - b.x) + (a.y-b.y)*(a.y-b.y));
     }
-    public void findAvailableR(Node root, Coordination c, double r){
+    public void findAvailableR(Node root, Coordination c, double r,int depth){
         if(root == null)
             return;
-        if((double) distanceCalculator(c,root.coordination)<(r*r)){
+        int currentDimension = depth%k;
+        if((double) distanceCalculator(c,root.coordination)<(r*r))
             System.out.println( root.getNodeDetailes());
-            findAvailableR(root.left,c,r);
-            findAvailableR(root.right,c,r);
-        } else{
-            findAvailableR(root.left,c,r);
+        //x
+        if (currentDimension== 0) {
+            if((root.coordination.x - c.x)*(root.coordination.x - c.x)<(r*r) ){
+                findAvailableR(root.right,c,r, depth + 1);
+                findAvailableR(root.left, c, r , depth+1 );
+            } else {
+                findAvailableR(root.left, c, r , depth+1);
+            }
+            
         }
+        //Y
+        if (currentDimension== 1) {
+            if((root.coordination.y - c.y)*(root.coordination.y - c.y)<(r*r) ){
+                findAvailableR(root.right,c,r, depth + 1);
+                findAvailableR(root.left, c, r , depth+1 );
+            } else {
+                findAvailableR(root.left, c, r , depth+1);
+            }
+        }
+        
     }
     public  Node nearestNeighborRec(Node point , Node root ,  Node bestNode , int depth){
 
