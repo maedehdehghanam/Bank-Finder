@@ -232,7 +232,7 @@ public class KDTree{
             
         }
         //Y
-        if (currentDimension== 1) {
+        else if (currentDimension== 1) {
             if((root.coordination.y - c.y)*(root.coordination.y - c.y)<(r*r) ){
                 findAvailableR(root.right,c,r, depth + 1);
                 findAvailableR(root.left, c, r , depth+1 );
@@ -241,6 +241,38 @@ public class KDTree{
             }
         }
         
+    }
+    public void neighborhoodCheckbank(Node root,Coordination LU, Coordination LD, Coordination RU, Coordination RD,int depth){
+        if(root == null)
+            return;
+        int currentDimension = depth %k;
+        if(root.coordination.x >= LU.x && root.coordination.x<= RU.x && root.coordination.y>= LD.y 
+            && root.coordination.y<= LU.y  ){
+           System.out.println(root.getNodeDetailes()); 
+        }
+        //X
+        if(currentDimension == 0){
+            if(root.coordination.x < RU.x ){
+                neighborhoodCheckbank(root.right, LU, LD, RU, RD,depth+1);
+                    if(root.coordination.x > LU.x){
+                         neighborhoodCheckbank(root.left, LU, LD, RU, RD,depth+1);
+                    }
+            } else {
+                neighborhoodCheckbank(root.left, LU, LD, RU, RD,depth+1);
+            }
+        }
+        //Y
+        else if(currentDimension == 1){
+            if(root.coordination.y < RU.y){
+                neighborhoodCheckbank(root.right, LU, LD, RU, RD,depth+1);
+                if(root.coordination.y > RD.y){
+                    neighborhoodCheckbank(root.left, LU, LD, RU, RD,depth+1);
+                }
+            } else{
+                neighborhoodCheckbank(root.left, LU, LD, RU, RD,depth+1);
+            }
+        }
+
     }
     public  Node nearestNeighborRec(Node point , Node root ,  Node bestNode , int depth){
 
