@@ -1,9 +1,9 @@
 public class Neighborhood{
-	private String name;
-	private final Coordination LU ;
-    private final Coordination LD ;
-    private final Coordination RU ;
-    private final Coordination RD ;
+	public String name;
+	public final Coordination LU ;
+    public final Coordination LD ;
+    public final Coordination RU ;
+    public final Coordination RD ;
     public Neighborhood(Coordination LU, Coordination LD, Coordination RU, Coordination RD, String name) {
         this.LU = LU;
         this.LD = LD;

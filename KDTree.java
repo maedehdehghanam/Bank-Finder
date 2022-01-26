@@ -242,34 +242,34 @@ public class KDTree{
         }
         
     }
-    public void neighborhoodCheckbank(Node root,Coordination LU, Coordination LD, Coordination RU, Coordination RD,int depth){
+    public void neighborhoodCheckbank(Node root, Neighborhood n,int depth){
         if(root == null)
             return;
         int currentDimension = depth %k;
-        if(root.coordination.x >= LU.x && root.coordination.x<= RU.x && root.coordination.y>= LD.y 
-            && root.coordination.y<= LU.y  ){
+        if(root.coordination.x >= n.LU.x && root.coordination.x<= n.RU.x && root.coordination.y>= n.LD.y 
+            && root.coordination.y<= n.LU.y  ){
            System.out.println(root.getNodeDetailes()); 
         }
         //X
         if(currentDimension == 0){
-            if(root.coordination.x < RU.x ){
-                neighborhoodCheckbank(root.right, LU, LD, RU, RD,depth+1);
-                    if(root.coordination.x > LU.x){
-                         neighborhoodCheckbank(root.left, LU, LD, RU, RD,depth+1);
+            if(root.coordination.x < n.RU.x ){
+                neighborhoodCheckbank(root.right, n,depth+1);
+                    if(root.coordination.x > n.LU.x){
+                         neighborhoodCheckbank(root.left, n,depth+1);
                     }
             } else {
-                neighborhoodCheckbank(root.left, LU, LD, RU, RD,depth+1);
+                neighborhoodCheckbank(root.left, n,depth+1);
             }
         }
         //Y
         else if(currentDimension == 1){
-            if(root.coordination.y < RU.y){
-                neighborhoodCheckbank(root.right, LU, LD, RU, RD,depth+1);
-                if(root.coordination.y > RD.y){
-                    neighborhoodCheckbank(root.left, LU, LD, RU, RD,depth+1);
+            if(root.coordination.y < n.RU.y){
+                neighborhoodCheckbank(root.right,n,depth+1);
+                if(root.coordination.y > n.RD.y){
+                    neighborhoodCheckbank(root.left, n,depth+1);
                 }
             } else{
-                neighborhoodCheckbank(root.left, LU, LD, RU, RD,depth+1);
+                neighborhoodCheckbank(root.left, n ,depth+1);
             }
         }
 
