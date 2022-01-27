@@ -128,6 +128,8 @@ public class BankFinder{
     		}
     		else if(order.equals("listB")){
     			String name = scanner.nextLine();
+    			Neighborhood n = TrieTree.searchForNeighborhood(name);
+    			Bank.allBanksKDTree.neighborhoodCheckbank(Bank.allBanksKDTree.getRoot(),n,0);
     			
     		}
     	}
