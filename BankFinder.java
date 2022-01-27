@@ -95,6 +95,8 @@ public class BankFinder{
     			Coordination c = new Coordination(scanner.nextInt(), scanner.nextInt());
     			Node ans  = Bank.allBanksKDTree.nearestNeighborRec(new Node(c),Bank.allBanksKDTree.getRoot() ,
     				new Node(new Coordination(Integer.MAX_VALUE , Integer.MAX_VALUE)),0);
+    			int r= distanceCalculator(ans.coordination,c);
+    			Bank.allBanksKDTree.printDistanceD(Bank.allBanksKDTree.getRoot(),c,r,0);
     			System.out.println("The nearest bank is "+ ans.place.name +" at "+ans.coordination.toString());
     		}
     		else if(order.equals("nearBr")){
@@ -112,6 +114,8 @@ public class BankFinder{
     				if(distanceCalculator(b.coordination,c)<r)
     					System.out.println("The nearest branch of "+b.name+" is at "+b.coordination.toString());
     				else{
+    					if(distanceCalculator(b.coordination,c)==r)
+    						System.out.println(b.name+ "(main Bank): "+b.coordination.toString());
     					b.branches.printDistanceD(b.branches.getRoot(),c,r,0);
     				}
     				
