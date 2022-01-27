@@ -20,7 +20,7 @@ public class TrieNode {
             children[i] = null ;
         }
     }
-    public Object getPlaceName(){
+    public String getPlaceName(){
     	return name;
     }
     public Object getPlace(){

@@ -101,15 +101,15 @@ public class BankFinder{
     			}
     			else{
     				Bank b = TrieTree.searchForBank(name);
-    				if(b.branches.searchTreeRecursive(b.branches.getRoot(), b, 0) == null){
-    					System.out.println("There is not such a bank");
-    				}
-    				
     				Coordination c = new Coordination(scanner.nextInt(), scanner.nextInt());
     				KDTree theBranchs = b.branches;
     				Node ans  = theBranchs.nearestNeighborRec(new Node(c),theBranchs.getRoot(),
     					new Node(new Coordination(Integer.MAX_VALUE , Integer.MAX_VALUE)),0);
-    				System.out.println("The nearest branch of "+ name+" is at "+ans.coordination.toString());
+    				if(((b.x-c.x)*(b.x=c.x)-(b.y-c.y)*(b.y- c.y))> ((ans.coordination.x - c.x)*(ans.coordination.x - c.x)
+    					-(ans.coordination.y-c.y)*(ans.coordination.y-c.y)))
+    					System.out.println("The nearest branch of "+b.name+" is at "+b.coordination.toString());
+    				else
+    					System.out.println("The nearest branch of "+ name+" is at "+ans.coordination.toString());
     				
     			}
     		}
@@ -117,6 +117,10 @@ public class BankFinder{
     			double r = scanner.nextDouble();
     			Coordination c= new Coordination(scanner.nextInt(), scanner.nextInt());
     			Bank.allBanksKDTree.findAvailableR(Bank.allBanksKDTree.getRoot(),c,r, 0);
+    		}
+    		else if(order.equals("listB")){
+    			String name = scanner.nextLine();
+    			
     		}
     	}
 	}

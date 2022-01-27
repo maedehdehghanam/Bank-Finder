@@ -28,7 +28,7 @@ public class Bank {
         allBanksKDTree.insert(bank);
     }
     public void addBankToTriTree(Bank bank){
-         TrieTree.insertBank(this, this.bankName);
+         TrieTree.bankNames.insertBank(this, this.bankName);
     }
     public void addBranch(Bank branch){
     	branches.insert(branch);
