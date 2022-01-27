@@ -312,5 +312,31 @@ public class KDTree{
         return bestNode ;
 
     }
+    public void printDistanceD(Node root,Coordination c ,int r, int depth){
+        if(root == null)
+            return;
+        int currentDimension = depth%k;
+        if((double) distanceCalculator(c,root.coordination)==(r))
+            System.out.println( root.getNodeDetailes());
+        //x
+        if (currentDimension== 0) {
+            if((root.coordination.x - c.x)*(root.coordination.x - c.x)<(r*r) ){
+                findAvailableR(root.right,c,r, depth + 1);
+                findAvailableR(root.left, c, r , depth+1 );
+            } else {
+                findAvailableR(root.left, c, r , depth+1);
+            }
+            
+        }
+        //Y
+        else if (currentDimension== 1) {
+            if((root.coordination.y - c.y)*(root.coordination.y - c.y)<(r*r) ){
+                findAvailableR(root.right,c,r, depth + 1);
+                findAvailableR(root.left, c, r , depth+1 );
+            } else {
+                findAvailableR(root.left, c, r , depth+1);
+            }
+        }
+    }
 
 }

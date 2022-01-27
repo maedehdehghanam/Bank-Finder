@@ -1,5 +1,8 @@
 import java.util.* ;
 public class BankFinder{
+	public static int distanceCalculator(Coordination a, Coordination b){
+        return((a.x - b.x)*(a.x - b.x) + (a.y-b.y)*(a.y-b.y));
+    }
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);  // Create a Scanner object
     	System.out.println("Hi! welcome to Bank Finder!");
@@ -105,11 +108,12 @@ public class BankFinder{
     				KDTree theBranchs = b.branches;
     				Node ans  = theBranchs.nearestNeighborRec(new Node(c),theBranchs.getRoot(),
     					new Node(new Coordination(Integer.MAX_VALUE , Integer.MAX_VALUE)),0);
-    				if(((b.x-c.x)*(b.x=c.x)-(b.y-c.y)*(b.y- c.y))> ((ans.coordination.x - c.x)*(ans.coordination.x - c.x)
-    					-(ans.coordination.y-c.y)*(ans.coordination.y-c.y)))
+    				int r = distanceCalculator(ans.coordination, c);
+    				if(distanceCalculator(b.coordination,c)<r)
     					System.out.println("The nearest branch of "+b.name+" is at "+b.coordination.toString());
-    				else
-    					System.out.println("The nearest branch of "+ name+" is at "+ans.coordination.toString());
+    				else{
+    					b.branches.printDistanceD(b.branches.getRoot(),c,r,0);
+    				}
     				
     			}
     		}
