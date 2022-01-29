@@ -127,6 +127,34 @@ public class TrieTree{
     }
 
     //////
+    public TrieNode removeBank(TrieNode root, Bank br, int depth){
+        if (root == null)
+            return null;
+
+        if (depth == br.name.length()) {
+
+
+            if (root.isEndOfWord)
+                root.isEndOfWord = false;
+
+            if (isEmpty(root)) {
+                root = null;
+            }
+
+            return root;
+        }
+
+
+        int index = br.name.charAt(depth) - 'a';
+        root.children[index] = removeBank(root.children[index] , br , depth + 1);
+
+        if(isEmpty(root) &&  (!root.isEndOfWord) ) {
+            root = null ;
+        }
+
+        return  root ;
+    }
+    /////
     public TrieNode removeBr(TrieNode root, Bank br, int depth)
     {
 
