@@ -4,6 +4,8 @@ public class BankFinder{
         return((a.x - b.x)*(a.x - b.x) + (a.y-b.y)*(a.y-b.y));
     }
 	public static void main(String[] args) {
+		// number of done commands
+		int p = 0 ;
 		Scanner scanner = new Scanner(System.in);  // Create a Scanner object
     	System.out.println("Hi! welcome to Bank Finder!");
     	while(true){
@@ -23,6 +25,7 @@ public class BankFinder{
 	    			System.out.println("Right down: \n");
 	    			Coordination RD = new Coordination(scanner.nextInt(), scanner.nextInt()) ;
 	    			Neighborhood neighborhood = new Neighborhood(LU,LD,RU,RD, name);
+	    			p++;
     			}
     			
     		}
@@ -45,6 +48,7 @@ public class BankFinder{
 		    			Bank.allBanksKDTree.getAllNodes();
 		    			mainBank.addBankToTriTree(mainBank);
 		    			System.out.println("Bank is successfully added");
+		    			p++;
 	    			}
 	    		}
 
@@ -67,6 +71,7 @@ public class BankFinder{
 	    			Bank.addToKDTree(branchBank);
 	    			TrieTree.searchForBank(branchBank.bankName).addBranch(branchBank);
 	    			System.out.println("Branch is successfully added");
+	    			p++;
     			}
     			
     		}
@@ -82,6 +87,7 @@ public class BankFinder{
     					boolean deleted = TrieTree.searchForBank(search.bankName).deleteBranch(search);
     					if(deleted){
     						System.out.println("Branch is deleted!");
+    						p++;
     					}
     					else{
     						System.out.println("this Branch doesn't exists!");
@@ -103,6 +109,7 @@ public class BankFinder{
     			else{
     				System.out.println("Number of branches: "+TrieTree.searchForBank(name).noBranches);
     				TrieTree.searchForBank(name).getAllBranches();
+    				p++;
     			}
     		}
     		else if(order.equals("nearB")){
@@ -113,6 +120,7 @@ public class BankFinder{
     			int r= distanceCalculator(ans.coordination,c);
     			Bank.allBanksKDTree.printDistanceD(Bank.allBanksKDTree.getRoot(),c,r,0);
     			System.out.println("The nearest bank is "+ ans.place.name +" at "+ans.coordination.toString());
+    			p++;
     		}
     		else if(order.equals("nearBr")){
     			System.out.println("Please enter the name of the bank:\n");
@@ -127,12 +135,14 @@ public class BankFinder{
     				Node ans  = theBranchs.nearestNeighborRec(new Node(c),theBranchs.getRoot(),
     					new Node(new Coordination(Integer.MAX_VALUE , Integer.MAX_VALUE)),0);
     				int r = distanceCalculator(ans.coordination, c);
-    				if(distanceCalculator(b.coordination,c)<r)
+    				if(distanceCalculator(b.coordination,c)<r){
     					System.out.println("The nearest branch of "+b.name+" is at "+b.coordination.toString());
-    				else{
+    					p++;
+    				} else {
     					if(distanceCalculator(b.coordination,c)==r)
     						System.out.println(b.name+ "(main Bank): "+b.coordination.toString());
     					b.branches.printDistanceD(b.branches.getRoot(),c,r,0);
+    					p++;
     				}
     				
     			}
@@ -143,12 +153,14 @@ public class BankFinder{
     			System.out.println("Please enter your desiered cordination:\n");
     			Coordination c= new Coordination(scanner.nextInt(), scanner.nextInt());
     			Bank.allBanksKDTree.findAvailableR(Bank.allBanksKDTree.getRoot(),c,r, 0);
+    			p++;
     		}
     		else if(order.equals("listB")){
     			System.out.println("Please enter your desiered neighborhood name:\n");
     			String name = scanner.nextLine();
     			Neighborhood n = TrieTree.searchForNeighborhood(name);
     			Bank.allBanksKDTree.neighborhoodCheckbank(Bank.allBanksKDTree.getRoot(),n,0);
+    			p++;
     			
     		}
     	}
