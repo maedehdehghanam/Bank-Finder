@@ -9,9 +9,11 @@ public class Stack{
 		array[ctr] = o;
 		ctr++;
 	}
-	public void popFromStack(){
+	public Object popFromStack(){
+		Object r = array[ctr];
 		array[ctr] = null;
 		ctr--;
+		return r;
 	}
 
 }

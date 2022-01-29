@@ -175,6 +175,16 @@ public class BankFinder{
     			stack.addToStack(new Undo(null, order));
     			p++;
     			
+    		} else if(order.equals("undo")){
+    			int pc = scanner.nextInt();
+    			if ((pc<0)  || (pc > p)){
+    				System.out.println("p in not avi");
+    			} else {
+    				for(int i = stack.ctr ; i<pc ; i--){
+    					Undo r =(Undo) stack.popFromStack();
+    					r.undo();
+    				}
+    			}
     		}
     	}
 	}
