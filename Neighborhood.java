@@ -12,24 +12,4 @@ public class Neighborhood{
         this.name = name;
         TrieTree.insertNeighborhood(this,this.name);
     }
-
-    public Coordination getLD() {
-        return LD;
-    }
-
-    public Coordination getLU() {
-        return LU;
-    }
-
-    public Coordination getRD() {
-        return RD;
-    }
-
-    public Coordination getRU() {
-        return RU;
-    }
-
-    public String getName() {
-        return name;
-    }
 }

@@ -59,17 +59,21 @@ public class TrieTree{
     public static Neighborhood searchForNeighborhood(String key){
         int index ;
         TrieNode current = rootNeighborhood;
-        for (int level = 0; level < key.length(); level++)
-        {
-            index = key.charAt(level) - 'a';
-            if (current.children[index] == null)
-                return null;
+        try{
+            for (int level = 0; level < key.length(); level++)
+            {
+                index = key.charAt(level) - 'a';
+                if (current.children[index] == null)
+                    return null;
 
-            current= current.children[index];
-        }
+                current= current.children[index];
+            }
 
-        if(current != null && current.isEndOfWord){
-            return (Neighborhood ) current.getPlace();
+            if(current != null && current.isEndOfWord){
+                return (Neighborhood ) current.getPlace();
+            }
+        } catch(Exception e){
+            System.out.println("your name should only contain lowercase letters");
         }
         return null;
     }
@@ -77,18 +81,24 @@ public class TrieTree{
     public static Bank searchForBank(String key){
         int index ;
         TrieNode current = rootBank;
-        for (int level = 0; level < key.length(); level++)
-        {
-            index = key.charAt(level) - 'a';
-            if (current.children[index] == null)
-                return null;
+        try{
+            for (int level = 0; level < key.length(); level++)
+            {
+                index = key.charAt(level) - 'a';
+                if (current.children[index] == null)
+                    return null;
 
-            current=  current.children[index];
+                current=  current.children[index];
+            }
+
+            if(current != null && current.isEndOfWord){
+                return (Bank) current.getPlace();
+            }
+        }catch(Exception e){
+            System.out.println("your name should only contain lowercase letters");
+            return ( new Bank(null, null));
         }
 
-        if(current != null && current.isEndOfWord){
-            return (Bank) current.getPlace();
-        }
         return null;
     }
     /////

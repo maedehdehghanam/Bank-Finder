@@ -11,6 +11,7 @@ public class Undo{
 			 
 		} else if(c.command.equals("addBr")){
 			//here we have to delete the branch
+			System.out.println("here i am");
 			Bank b = (Bank) c.place;
 			boolean deleted =TrieTree.searchForBank(b.bankName).deleteBranch(b);
 			if(deleted)

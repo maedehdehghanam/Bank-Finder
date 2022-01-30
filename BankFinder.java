@@ -26,6 +26,7 @@ public class BankFinder{
 	    			System.out.println("Right down: \n");
 	    			Coordination RD = new Coordination(scanner.nextInt(), scanner.nextInt()) ;
 	    			Neighborhood neighborhood = new Neighborhood(LU,LD,RU,RD, name);
+	    			System.out.println("neighborhood successfully added!");
 	    			p++;
 	    			Undo u = new Undo(neighborhood,order);
 	    			stack.addToStack(u);
@@ -170,21 +171,32 @@ public class BankFinder{
     		else if(order.equals("listB")){
     			System.out.println("Please enter your desiered neighborhood name:\n");
     			String name = scanner.nextLine();
-    			Neighborhood n = TrieTree.searchForNeighborhood(name);
-    			Bank.allBanksKDTree.neighborhoodCheckbank(Bank.allBanksKDTree.getRoot(),n,0);
-    			stack.addToStack(new Undo(null, order));
-    			p++;
+    			if(TrieTree.searchForNeighborhood(name)==null){
+    				System.out.println("A neighborhood with this name doesnt exists!");
+    			} else{
+    				Neighborhood n = TrieTree.searchForNeighborhood(name);
+	    			Bank.allBanksKDTree.neighborhoodCheckbank(Bank.allBanksKDTree.getRoot(),n,0);
+	    			stack.addToStack(new Undo(null, order));
+	    			p++;
+    			}
+    			
     			
     		} else if(order.equals("undo")){
     			int pc = scanner.nextInt();
     			if ((pc<0)  || (pc > p)){
-    				System.out.println("p in not avi");
+    				System.out.println("p in not available");
     			} else {
-    				for(int i = stack.ctr ; i<pc ; i--){
+    				for(int i = 0 ; i<pc ; i++){
     					Undo r =(Undo) stack.popFromStack();
+    					if(r == null)
+    						System.out.println("fuck");
+    					System.out.println(r.command);
+    					System.out.println(stack.ctr);
     					r.undo();
     				}
     			}
+    		} else if(order.equals("End")){
+    			return;
     		}
     	}
 	}
