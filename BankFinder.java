@@ -12,18 +12,18 @@ public class BankFinder{
     	while(true){
     		String order = scanner.nextLine();
     		if (order.equals("addN")){
-    			System.out.println("Please enter your neighborhood name:\n");
+    			System.out.println("Please enter your neighborhood name:");
     			String name = scanner.nextLine();
     			if(TrieTree.searchForNeighborhood(name)!=null){
     				System.out.println("A neighborhood with this name already exists!");
     			} else{
-    				System.out.println("Left up:\n");	
+    				System.out.println("Left up:");	
     				Coordination LU = new Coordination(scanner.nextInt(), scanner.nextInt()) ;
-    				System.out.println("Left down:\n");	
+    				System.out.println("Left down:");	
 	    			Coordination LD = new Coordination(scanner.nextInt(), scanner.nextInt()) ;
-	    			System.out.println("Right up: \n");
+	    			System.out.println("Right up:");
 	    			Coordination RU = new Coordination(scanner.nextInt(), scanner.nextInt()) ;
-	    			System.out.println("Right down: \n");
+	    			System.out.println("Right down: ");
 	    			Coordination RD = new Coordination(scanner.nextInt(), scanner.nextInt()) ;
 	    			Neighborhood neighborhood = new Neighborhood(LU,LD,RU,RD, name);
 	    			System.out.println("neighborhood successfully added!");
@@ -133,7 +133,7 @@ public class BankFinder{
     			p++;
     		}
     		else if(order.equals("nearBr")){
-    			System.out.println("Please enter the name of the bank:\n");
+    			System.out.println("Please enter the name of the bank:");
     			String name =scanner.nextLine();
     			if(TrieTree.searchForBank(name)== null){
     				System.out.println("There is not such a bank");
@@ -160,16 +160,16 @@ public class BankFinder{
     			}
     		}
     		else if(order.equals("availB")){
-    			System.out.println("Please enter R:\n");
+    			System.out.println("Please enter R:");
     			double r = scanner.nextDouble();
-    			System.out.println("Please enter your desiered cordination:\n");
+    			System.out.println("Please enter your desiered cordination:");
     			Coordination c= new Coordination(scanner.nextInt(), scanner.nextInt());
     			Bank.allBanksKDTree.findAvailableR(Bank.allBanksKDTree.getRoot(),c,r, 0);
     			stack.addToStack(new Undo(null, order));
     			p++;
     		}
     		else if(order.equals("listB")){
-    			System.out.println("Please enter your desiered neighborhood name:\n");
+    			System.out.println("Please enter your desiered neighborhood name:");
     			String name = scanner.nextLine();
     			if(TrieTree.searchForNeighborhood(name)==null){
     				System.out.println("A neighborhood with this name doesnt exists!");
@@ -186,14 +186,12 @@ public class BankFinder{
     			if ((pc<0)  || (pc > p)){
     				System.out.println("p in not available");
     			} else {
-    				for(int i = 0 ; i<pc ; i++){
+    				for(int i = p ; i>pc ; i--){
     					Undo r =(Undo) stack.popFromStack();
-    					if(r == null)
-    						System.out.println("fuck");
     					System.out.println(r.command);
-    					System.out.println(stack.ctr);
     					r.undo();
     				}
+    				p = pc;
     			}
     		} else if(order.equals("End")){
     			return;

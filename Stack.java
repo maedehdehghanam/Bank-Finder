@@ -10,8 +10,8 @@ public class Stack{
 		ctr++;
 	}
 	public Object popFromStack(){
-		Object r = array[ctr];
-		array[ctr] = null;
+		Object r = array[ctr-1];
+		array[ctr-1] = null;
 		ctr--;
 		return r;
 	}
